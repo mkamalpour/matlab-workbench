@@ -4,15 +4,16 @@ Four university experiments, with **independent MATLAB implementations** and a P
 
 ## Python setup
 
-Verified environment: Windows, Python **3.13.5**. From this directory:
+Verified environment: Windows, Python **3.13.5**. From the repository root:
 
 ```powershell
 conda activate base
+# Optional, only if dependencies are missing and installation is authorized:
 python -m pip install -r requirements.txt
 python workbench.py
 ```
 
-Open the localhost address printed in the terminal. Stop the app with Ctrl+C. The server binds to `127.0.0.1`. On other operating systems use `.venv/bin/python`; those platforms are not verified. `requirements.txt` pins the direct dependencies; `requirements-lock.txt` records the complete verified environment.
+Open the localhost address printed in the terminal. Stop the app with Ctrl+C. The server binds to `127.0.0.1`. On other operating systems use Python from an existing compatible environment; those platforms are not verified. `requirements.txt` specifies the direct dependencies; no complete environment lockfile is included.
 
 ## MATLAB setup
 
