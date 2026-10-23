@@ -1,0 +1,149 @@
+{
+  "outliers": {
+    "values": [
+      null,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      100
+    ],
+    "expected": {
+      "q1": 2.5,
+      "q3": 6.5,
+      "iqr": 4.0,
+      "lower": -3.5,
+      "upper": 12.5,
+      "rows": [
+        {
+          "row_index": 9,
+          "value": 100.0
+        }
+      ]
+    }
+  },
+  "transport": {
+    "commands": [
+      "ADD-DRIVER z (1,0) BIKE",
+      "ADD-DRIVER a (-1,0) BIKE",
+      "CREATE-ORDER BIKE (0,0) (5,6)",
+      "CREATE-ORDER BIKE (0,0) (3,4)",
+      "RECIEVE-ORDER (0,0) (5,6) a"
+    ],
+    "expected": {
+      "version": 1,
+      "drivers": [
+        {
+          "username": "z",
+          "x": 1,
+          "y": 0,
+          "category": "BIKE"
+        },
+        {
+          "username": "a",
+          "x": 5,
+          "y": 6,
+          "category": "BIKE"
+        }
+      ],
+      "active": [
+        {
+          "order_id": 2,
+          "username": "z",
+          "category": "BIKE",
+          "start": [
+            0,
+            0
+          ],
+          "finish": [
+            3,
+            4
+          ]
+        }
+      ],
+      "completed": [
+        {
+          "order_id": 1,
+          "username": "a",
+          "category": "BIKE",
+          "start": [
+            0,
+            0
+          ],
+          "finish": [
+            5,
+            6
+          ]
+        }
+      ],
+      "next_order_id": 3
+    }
+  },
+  "mpg": {
+    "train_indices": [
+      1,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "expected_predictions": [
+      26.344534726481545,
+      25.24332962513423,
+      31.423771846970567,
+      30.542547277445653,
+      30.68823434912549
+    ],
+    "expected_test_indices": [
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "model": {
+      "version": 1,
+      "feature_names": [
+        "Acceleration",
+        "Weight",
+        "InverseAcceleration",
+        "InverseWeight"
+      ],
+      "imputation": [
+        13.907610675431354,
+        3064.1035868413173
+      ],
+      "inverse_means": [
+        0.0745517494824178,
+        0.000344297825787615
+      ],
+      "feature_means": [
+        13.907610675431354,
+        3064.1035868413173,
+        1.0000000000000002,
+        1.0000000000000002
+      ],
+      "feature_scales": [
+        2.9662278026374294,
+        748.1864896175437,
+        0.19410274133432945,
+        0.24687905360494525
+      ],
+      "coefficients": [
+        26.02831797930557,
+        0.4637894072873032,
+        -3.4767027238349297,
+        1.3130307032271964,
+        1.1897428418736269
+      ]
+    }
+  }
+}
