@@ -8,9 +8,9 @@ import numpy as np
 import pandas as pd
 from scipy.io import loadmat
 
-import analysis
-import audio
-from transport import TransportSystem
+from matlab_workbench import analysis
+from matlab_workbench import audio
+from matlab_workbench.transport import TransportSystem
 
 
 class StatisticsTests(unittest.TestCase):
@@ -158,7 +158,7 @@ class TransportTests(unittest.TestCase):
 
 class SharedFixtures(unittest.TestCase):
     def test_expected_cross_language_vectors(self):
-        root = Path(__file__).parent / 'fixtures'
+        root = Path(__file__).resolve().parents[1] / 'fixtures'
         if not (root / 'shared.json').exists():
             self.skipTest('Fixtures not generated yet.')
         fixture = json.loads((root / 'shared.json').read_text())

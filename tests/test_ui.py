@@ -5,7 +5,7 @@ from streamlit.testing.v1 import AppTest
 
 class WorkbenchUI(unittest.TestCase):
     def test_demo_workflows(self):
-        app = AppTest.from_file(str(Path(__file__).with_name('app.py'))).run(timeout=30)
+        app = AppTest.from_file(str(Path(__file__).resolve().parents[1] / 'app.py')).run(timeout=30)
         self.assertFalse(app.exception)
         for label in ['Run audio comparison', 'Train MPG model']:
             next(b for b in app.button if b.label == label).click().run(timeout=60)

@@ -3,13 +3,13 @@ import json
 from pathlib import Path
 import numpy as np
 from scipy.io import savemat
-import analysis
-import audio
-from transport import TransportSystem
+from matlab_workbench import analysis
+from matlab_workbench import audio
+from matlab_workbench.transport import TransportSystem
 
 
 def main():
-    root = Path(__file__).parent / 'fixtures'
+    root = Path(__file__).resolve().parents[1] / 'fixtures'
     root.mkdir(exist_ok=True)
     values = [None, 1, 2, 3, 4, 5, 6, 7, 100]
     report = analysis.outliers([np.nan if value is None else value for value in values])

@@ -7,7 +7,7 @@ import sys
 
 def main():
     if importlib.util.find_spec('streamlit') is None:
-        print('Missing dependencies. Create .venv and install requirements.txt; see README.md.', file=sys.stderr)
+        print('Missing dependencies. Activate an existing environment with Streamlit; see README.md.', file=sys.stderr)
         return 1
     root = Path(__file__).resolve().parent
     command = [sys.executable, '-m', 'streamlit', 'run', str(root / 'app.py'), '--server.address', '127.0.0.1',
