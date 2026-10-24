@@ -13,7 +13,7 @@ from matlab_workbench import analysis
 from matlab_workbench.transport import TransportSystem
 
 def main():
-    st.set_page_config(page_title="MATLAB Workbench", layout="wide")
+    st.set_page_config(page_title="Numerical Lab", layout="wide")
     st.markdown('''<style>
     .stApp{background:#f1f4f8;color:#16253e} .block-container{max-width:1400px;padding-top:4.75rem;padding-bottom:3rem}
     h1,h2,h3{letter-spacing:-.035em} h1{font-size:2.8rem!important}
@@ -28,7 +28,7 @@ def main():
     }
     </style>''', unsafe_allow_html=True)
     st.caption("COMPUTING LAB / MATLAB + PYTHON")
-    st.title("One desk. Four experiments.")
+    st.title("Numerical Lab")
     st.write("Explore signals, inspect data, dispatch transport and model fuel economy. Your inputs stay in this session; export only when ready.")
     overview, signal, outlier, transport_tab, mpg = st.tabs(["Overview", "Audio cancellation", "Outlier detection", "Transport", "MPG prediction"])
 

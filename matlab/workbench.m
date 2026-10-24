@@ -1,8 +1,8 @@
 function workbench()
 % Native MATLAB coursework dashboard. No Python or optional toolbox needed.
-f=uifigure('Name','MATLAB Workbench','Position',[80 80 1100 760]);
+f=uifigure('Name','Numerical Lab','Position',[80 80 1100 760]);
 g=uigridlayout(f,[2 1]);g.RowHeight={55,'1x'};
-uilabel(g,'Text','MATLAB Workbench | signals, data and simulation','FontSize',22,'FontWeight','bold');
+uilabel(g,'Text','Numerical Lab | signals, data and simulation','FontSize',22,'FontWeight','bold');
 tabs=uitabgroup(g); player=[];result=[];[state,~]=transport_system();
 f.CloseRequestFcn=@closeApp;
 a=uitab(tabs,'Title','Audio cancellation');ag=uigridlayout(a,[7 2]);ag.RowHeight={30,35,35,35,35,35,'1x'};

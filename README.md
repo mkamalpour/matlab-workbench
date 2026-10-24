@@ -1,6 +1,10 @@
-# MATLAB Workbench
+# Numerical Lab
 
-Four numerical labs with a Python interface and separate native MATLAB implementations. Educational software; see the verification limits below.
+Four university labs, with the original MATLAB implementations and a Python interface for trying them without MATLAB: remove correlated noise from audio, find outliers, dispatch vehicles, and predict fuel economy.
+
+## Try it first
+
+Open **Audio cancellation**, keep **Synthetic example** and the default NLMS filter, then click **Run audio comparison**. Listen to the output and compare the plots. Each of the other tabs has its own inputs; MATLAB runs separately from the Python interface.
 
 ## Run
 
@@ -12,6 +16,8 @@ python -m streamlit run app.py --server.address 127.0.0.1
 ```
 
 Dependencies are recorded in `requirements.txt`; review them before any optional installation. Heavy workloads and private datasets are not needed to explore the demos. `python workbench.py` is an alternative launcher.
+
+On Windows, `run.bat --check` checks the active environment without opening the app. Run `run.bat` to start, or `run.bat --server.port 8502` if another app is using the default port. The launcher works from any working directory and installs nothing.
 
 ## Layout
 
@@ -38,6 +44,6 @@ Python entry point: `python workbench.py`. Native entry points and limits: [MATL
 python -m unittest discover -s tests -v
 ```
 
-See [method and usage](docs/METHOD.md) for capabilities, original comparisons, privacy rules and material limitations. Tests use synthetic data; native MATLAB execution and large custom datasets are not implied to be verified. No license has been selected.
+See [method and usage](docs/METHOD.md) for capabilities, original comparisons, privacy rules and material limitations. Tests use synthetic data; native MATLAB execution and large custom datasets are not implied to be verified.
 
-Current lightweight check (Windows, existing Conda base / Python 3.13.5): **16 passed**. No dependency installs, model downloads, live publishing, or heavy datasets were used. Native MATLAB execution remains unverified.
+Checked on Windows with Python 3.13.5 (Conda base): **16 tests passed**. Native MATLAB execution remains unverified.

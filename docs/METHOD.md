@@ -1,4 +1,4 @@
-# MATLAB Workbench
+# Numerical Lab
 
 Four university experiments, with **independent MATLAB implementations** and a Python browser interface. MATLAB remains the coursework version; Python makes data loading, parameter exploration, playback, plots and downloads easier. No MATLAB Engine, paid service or external AI is needed for Python.
 
