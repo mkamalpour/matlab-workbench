@@ -1,5 +1,7 @@
 # Numerical Lab
 
+**[Explore the interactive project presentation](docs/overview.html)** — open locally in your browser; works offline.
+
 Four university labs, with the original MATLAB implementations and a Python interface for trying them without MATLAB: remove correlated noise from audio, find outliers, dispatch vehicles, and predict fuel economy.
 
 ## Try it first
