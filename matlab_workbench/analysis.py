@@ -104,11 +104,19 @@ class MPGModel:
     def _features(self, frame):
         values = _predictors(frame)
         values = np.where(np.isnan(values), self.imputation, values)
-        return np.column_stack((values, 1 / values / self.inverse_means))
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            features = np.column_stack((values, 1 / values / self.inverse_means))
+        if not np.isfinite(features).all():
+            raise ValueError("Predictor magnitudes exceed the supported numerical range.")
+        return features
 
     def predict(self, frame):
-        features = (self._features(frame) - self.feature_means) / self.feature_scales
-        return np.column_stack((np.ones(len(features)), features)) @ self.coefficients
+        with np.errstate(over="ignore", divide="ignore", invalid="ignore"):
+            features = (self._features(frame) - self.feature_means) / self.feature_scales
+            predictions = np.column_stack((np.ones(len(features)), features)) @ self.coefficients
+        if not np.isfinite(features).all() or not np.isfinite(predictions).all():
+            raise ValueError("Prediction magnitudes exceed the supported numerical range.")
+        return predictions
 
     def to_dict(self):
         return dict(version=1, feature_names=FEATURE_NAMES, imputation=self.imputation.tolist(),
@@ -146,7 +154,8 @@ def train_mpg(frame, train_fraction=0.8, seed=42, train_indices=None):
             raise ValueError('Training indices must be unique observed-MPG row indices.')
         lookup = {original + 1: offset for offset, original in enumerate(row_ids)}
         train = np.array([lookup[number] for number in requested], dtype=int)
-        test = np.array([index for index in range(len(data)) if index not in set(train)], dtype=int)
+        training_set = set(train)
+        test = np.array([index for index in range(len(data)) if index not in training_set], dtype=int)
     if len(train) < 5 or len(test) < 1:
         raise ValueError('Use at least five training rows and one test row.')
     for column in range(2):

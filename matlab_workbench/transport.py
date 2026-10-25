@@ -99,14 +99,15 @@ class TransportSystem:
                     raise ValueError('Order IDs must be unique positive integers below next_order_id.')
                 if not isinstance(username, str) or username not in system.drivers or order['category'] != system.drivers[username]['category']:
                     raise ValueError('Every order must reference a registered driver with matching category.')
-                _coordinate(order['start'])
-                _coordinate(order['finish'])
+                normalized = copy.deepcopy(order)
+                normalized['start'] = _coordinate(order['start'])
+                normalized['finish'] = _coordinate(order['finish'])
                 if field == 'active':
                     if username in busy:
                         raise ValueError('A driver cannot have two active orders.')
                     busy.add(username)
                 seen_orders.add(identifier)
-                getattr(system, field).append(copy.deepcopy(order))
+                getattr(system, field).append(normalized)
         system.next_order_id = data['next_order_id']
         return system
 

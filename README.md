@@ -46,4 +46,6 @@ python -m unittest discover -s tests -v
 
 See [method and usage](docs/METHOD.md) for capabilities, original comparisons, privacy rules and material limitations. Tests use synthetic data; native MATLAB execution and large custom datasets are not implied to be verified.
 
-Checked on Windows with Python 3.13.5 (Conda base): **16 tests passed**. Native MATLAB execution remains unverified.
+Checked on Windows with Python 3.13.5 (Conda base): **19 tests passed**. Native MATLAB execution remains unverified.
+
+Restored transport coordinates are normalized consistently, and MPG prediction rejects numerical overflow rather than returning nonfinite results.
