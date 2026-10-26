@@ -8,6 +8,22 @@ Four university labs, with the original MATLAB implementations and a Python inte
 
 Open **Audio cancellation**, keep **Synthetic example** and the default NLMS filter, then click **Run audio comparison**. Listen to the output and compare the plots. Each of the other tabs has its own inputs; MATLAB runs separately from the Python interface.
 
+<details>
+<summary>Using the existing managed Windows workspace</summary>
+
+Assigned environment: **base** — Python **3.13.5**, using the existing Conda environment `base`. Open `Workspaces/numerical-lab.code-workspace` from the workspace folder to select its interpreter.
+
+From this repository folder in PowerShell:
+
+```powershell
+& '..\Launchers\numerical-lab.cmd' --check --deep
+& '..\Launchers\numerical-lab.cmd'
+```
+
+The launcher activates the assigned environment and checks dependencies. It does not install packages or download models. These launchers belong to the managed parent workspace; for a standalone clone, follow the setup instructions below in your own compatible environment. Keep optional model/provider prerequisites separate from the offline examples.
+
+</details>
+
 ## Run
 
 Activate an existing Python/Conda environment with the requirements already available. Nothing is installed automatically.
