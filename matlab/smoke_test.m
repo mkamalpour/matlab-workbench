@@ -8,6 +8,11 @@ text=transport_json(s);assert(contains(text,'"drivers":[{'),'Drivers must encode
 s=validate_transport_state(jsondecode(text));assert(s.drivers(1).x==3&&isempty(s.active)&&numel(s.completed)==1);
 a=(1:12)';data=table(20+a,10+a,1000+10*a,'VariableNames',{'MPG','Acceleration','Weight'});
 r=mpg_prediction(data,1:9);p=mpg_predict(r,data(10:12,:));assert(max(abs(p-r.predicted))<1e-10);
+for invalid=[0 -1]
+ bad=data;bad.MPG(1)=invalid;rejected=false;
+ try,mpg_prediction(bad,1:9);catch,rejected=true;end
+ assert(rejected,'Nonpositive observed MPG must be rejected');
+end
 o=struct('plots',false,'taps',4);t=(0:99)'/8000;clean=sin(2*pi*440*t);reference=cos(2*pi*123*t);
 r=AudioNoiseCancellation(clean+.3*reference,reference,8000,clean,o);assert(all(isfinite(r.NLMS.cleaned)));
 fprintf('Native smoke checks passed.\n');

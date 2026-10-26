@@ -138,7 +138,7 @@ def main():
                 st.line_chart(pd.DataFrame({'Hours':values}))
                 st.write("Flagged original rows")
                 st.dataframe(pd.DataFrame(result['rows']),hide_index=True)
-                st.caption(f"IQR: {result['iqr']:.3g} | Removed outliers: {result['removed_count']}")
+                st.caption(f"IQR: {result['iqr']:.3g} | Missing observations excluded: {result['removed_count']}")
                 st.download_button('Download flagged rows CSV',pd.DataFrame(result['rows'],columns=['row_index','value']).to_csv(index=False),'outlier_rows.csv')
                 st.caption("NaN durations are excluded. Odd-sized quartiles exclude the center observation.")
                 download_json("Download outlier report",result,'outliers.json')

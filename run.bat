@@ -7,7 +7,7 @@ if errorlevel 1 (
  echo Python was not found. Activate your existing Conda base or ml environment first.
  exit /b 1
 )
-python -B -c "import importlib.util,sys; missing=[n for n in ['streamlit', 'pandas', 'numpy', 'scipy', 'sklearn'] if importlib.util.find_spec(n) is None]; print('Missing dependencies: '+', '.join(missing) if missing else 'Numerical Lab: dependencies found'); sys.exit(bool(missing))"
+python -B -c "import importlib.util,sys; missing=[n for n in ['streamlit', 'pandas', 'numpy', 'scipy'] if importlib.util.find_spec(n) is None]; print('Missing dependencies: '+', '.join(missing) if missing else 'Numerical Lab: dependencies found'); sys.exit(bool(missing))"
 if errorlevel 1 (
  echo Use an environment with this project's requirements. This launcher installs nothing.
  exit /b 1

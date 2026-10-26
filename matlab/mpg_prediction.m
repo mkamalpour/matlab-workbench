@@ -3,7 +3,8 @@ function r=mpg_prediction(data,train_indices)
 % Explicit one-based indices refer to original source rows before dropping missing MPG.
 assert(istable(data),'Supply table with MPG, Acceleration and Weight');
 ids=find(~isnan(data.MPG));data=data(ids,:); y=data.MPG; x=[data.Acceleration data.Weight];
-assert(all(isfinite(y)) && ~any(isinf(x(:))),'Infinite data');
+assert(all(isfinite(y)) && all(y>0),'Observed MPG must be positive and finite');
+assert(~any(isinf(x(:))),'Infinite predictors');
 assert(all(x(~isnan(x))>0),'Predictors must be positive');
 n=height(data); assert(n>=8,'At least eight rows required');
 if nargin<2, rng(42); p=randperm(n); train_indices=p(1:floor(.8*n+.5)); end
