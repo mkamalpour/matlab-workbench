@@ -219,6 +219,7 @@ def main():
             if old!=mpg_sig: st.warning("Data or split changed. Train again to update results.")
             else:
                 st.dataframe(pd.DataFrame([result['metrics']]),hide_index=True)
+                st.caption('Baseline always predicts the training-set mean on the same held-out rows. Positive RMSE skill beats that baseline; zero ties it; negative is worse. Undefined skill is reported as null.')
                 st.scatter_chart(result['report'],x='actual',y='predicted')
                 st.dataframe(result['report'],hide_index=True)
                 st.caption('Held-out residuals: actual minus predicted MPG')

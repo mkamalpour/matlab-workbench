@@ -72,3 +72,9 @@ Restored transport coordinates are normalized consistently, and MPG prediction r
 
 See the [engineering audit](docs/ENGINEERING_AUDIT.md) for the dated test baseline,
 project assessment, environment assignment and remaining work.
+
+## Additional workflow improvements
+
+MPG holdout reports compare the fitted model with a training-only mean baseline, including baseline MAE/RMSE, RMSE skill and baseline residuals on identical held-out rows.
+
+Train MPG model, inspect baseline metrics and download held-out predictions. Positive RMSE skill beats the baseline.

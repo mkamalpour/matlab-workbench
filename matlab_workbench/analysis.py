@@ -175,10 +175,18 @@ def train_mpg(frame, train_fraction=0.8, seed=42, train_indices=None):
     model = MPGModel(imputation, inverse_means, means, scales, coefficients)
     predictions = model.predict(data.iloc[test])
     residual = y[test] - predictions
+    # Baseline sees the training targets only, on exactly the same holdout.
+    baseline = float(np.mean(y[train]))
+    baseline_residual = y[test] - baseline
+    baseline_rmse = float(np.sqrt(np.mean(baseline_residual ** 2)))
+    rmse = float(np.sqrt(np.mean(residual ** 2)))
     denominator = np.sum((y[test] - np.mean(y[test])) ** 2)
     r2 = float(1 - np.sum(residual ** 2) / denominator) if denominator > 0 else None
-    report = pd.DataFrame(dict(row_index=row_ids[test] + 1, actual=y[test], predicted=predictions, residual=residual))
-    return dict(model=model, metrics=dict(rmse=float(np.sqrt(np.mean(residual ** 2))), mae=float(np.mean(abs(residual))),
+    report = pd.DataFrame(dict(row_index=row_ids[test] + 1, actual=y[test], predicted=predictions, residual=residual,
+                              baseline_prediction=baseline, baseline_residual=baseline_residual))
+    return dict(model=model, metrics=dict(rmse=rmse, mae=float(np.mean(abs(residual))),
+                                         baseline_rmse=baseline_rmse, baseline_mae=float(np.mean(abs(baseline_residual))),
+                                         rmse_skill=1 - rmse / baseline_rmse if baseline_rmse > 0 else None,
                                          r2=r2, train_count=len(train), test_count=len(test)), report=report,
                 split=dict(train=(row_ids[train] + 1).tolist(), test=(row_ids[test] + 1).tolist()), feature_names=FEATURE_NAMES)
 
